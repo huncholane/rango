@@ -3,7 +3,8 @@
     {
       "splitTerminals": [
         {
-          "name": "root"
+          "name": "root",
+          "commands": ["source venv/Scripts/activate"]
         }
       ]
     },
@@ -23,11 +24,11 @@
       "splitTerminals": [
         {
           "name": "frontend",
-          "commands": ["cd rango/frontend"]
+          "commands": ["source venv/Scripts/activate", "cd rango/frontend"]
         },
         {
           "name": "backend",
-          "commands": ["cd rango/backend"]
+          "commands": ["source venv/Scripts/activate", "cd rango/backend"]
         }
       ]
     }
