@@ -7,5 +7,5 @@ python manage.py createsecret
 # migrate database
 python manage.py migrate
 
-# run rango with uvicorn
-uvicorn rango.asgi:application --host 0.0.0.0
+# run backend with uvicorn
+uvicorn backend.asgi:application --host 0.0.0.0

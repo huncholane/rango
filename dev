@@ -2,12 +2,12 @@
 # For development only
 
 # build the frontend
-cd web/frontend
+cd rango/frontend
 npm run build
 cd ..
 
 # create secret key
-cd rango
+cd backend
 python manage.py createsecret
 
 # run development server

@@ -9,7 +9,7 @@ class Command(BaseCommand):
         from django.core.management.utils import get_random_secret_key
         new_secret_key = get_random_secret_key()
         # Update the .env file
-        from rango.settings import BASE_DIR
+        from backend.settings import BASE_DIR
         env_file = BASE_DIR / '.env'
         with open(env_file, 'w') as f:
             f.write(f'SECRET_KEY="{new_secret_key}"')

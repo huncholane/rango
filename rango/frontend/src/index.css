@@ -14,9 +14,9 @@
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
+  -rangokit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  -rangokit-text-size-adjust: 100%;
 }
 
 a {
@@ -57,7 +57,7 @@ button:hover {
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 4px auto -rangokit-focus-ring-color;
 }
 
 @media (prefers-color-scheme: light) {

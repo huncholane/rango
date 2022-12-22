@@ -1,22 +1,22 @@
 services:
-  web:
-    build: web
+  rango:
+    build: rango
     volumes:
-      - assets:/web/assets
-      - media:/web/media
+      - assets:/rango/assets
+      - media:/rango/media
 
   nginx:
     image: nginx:1.23.3-alpine
     ports:
       - "80:80"
     volumes:
-      - assets:/web/assets
-      - media:/web/media
+      - assets:/rango/assets
+      - media:/rango/media
       - ./nginx/templates:/etc/nginx/templates
     links:
-      - web
+      - rango
     depends_on:
-      - web
+      - rango
     env_file:
       - .env
 
