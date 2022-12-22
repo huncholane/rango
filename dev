@@ -1,14 +1,36 @@
 #!/bin/bash
 # For development only
 
-# build the frontend
-cd rango/frontend
-npm run build
-cd ..
+# if venv doesn't exist, create it
+if [ ! -d "venv" ]; then
+    python -m venv venv
+fi
 
-# create secret key
-cd backend
-python manage.py createsecret
+# if venv is not activated, activate it
+if [ -z "$VIRTUAL_ENV" ]; then
+    source venv/Scripts/activate
+fi
 
-# run development server
-python manage.py runserver
+# if first arg is back, build frontend and run backend
+if [ "$1" = "back" ]; then
+    # build the frontend
+    cd rango/frontend
+    npm run build
+    cd ..
+
+    # create secret key
+    cd backend
+    python manage.py createsecret
+
+    # migrate database
+    python manage.py migrate
+
+    # run backend development server
+    python manage.py runserver & cd ../..
+fi
+
+# if first arg is front, run frontend development server
+if [ "$1" = "front" ]; then
+    cd rango/frontend
+    npm run dev & cd ../..
+fi

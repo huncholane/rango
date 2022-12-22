@@ -5,7 +5,7 @@ RUN npm install
 COPY . /rango
 RUN npm run build
 
-FROM python:3
+FROM python:3-alpine
 WORKDIR /rango
 COPY ./backend/requirements.txt .
 RUN pip install -r requirements.txt
@@ -13,4 +13,4 @@ COPY ./backend .
 COPY --from=frontend /rango/backend/backend/static /rango/assets
 COPY --from=frontend /rango/backend/backend/templates /rango/templates
 
-CMD ["/bin/bash", "entrypoint.sh"]
+CMD ["sh", "entrypoint.sh"]

@@ -22,4 +22,6 @@ services:
 
 volumes:
   assets:
+    name: rango_assets
   media:
+    name: rango_media
