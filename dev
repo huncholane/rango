@@ -1,0 +1,14 @@
+#!/bin/bash
+# For development only
+
+# build the frontend
+cd web/frontend
+npm run build
+cd ..
+
+# create secret key
+cd rango
+python manage.py createsecret
+
+# run development server
+python manage.py runserver

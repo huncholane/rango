@@ -63,7 +63,7 @@ ROOT_URLCONF = 'rango.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [FRONTEND_BUILD_PATH],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,13 +124,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_URL = 'assets/'
+STATIC_ROOT = BASE_DIR / 'assets'
 
 # Media files (user uploaded files)
+# https://docs.djangoproject.com/en/4.1/topics/files/
 
-MEDIA_URL = '/'
-MEDIA_ROOT = BASE_DIR / FRONTEND_BUILD_PATH
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

@@ -1,0 +1,25 @@
+services:
+  web:
+    build: web
+    volumes:
+      - assets:/web/assets
+      - media:/web/media
+
+  nginx:
+    image: nginx:1.23.3-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - assets:/web/assets
+      - media:/web/media
+      - ./nginx/templates:/etc/nginx/templates
+    links:
+      - web
+    depends_on:
+      - web
+    env_file:
+      - .env
+
+volumes:
+  assets:
+  media:
