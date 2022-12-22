@@ -1,0 +1,35 @@
+{
+  "restoreTerminals.terminals": [
+    {
+      "splitTerminals": [
+        {
+          "name": "root"
+        }
+      ]
+    },
+    {
+      "splitTerminals": [
+        {
+          "name": "frontserver",
+          "commands": ["./dev front"]
+        },
+        {
+          "name": "backserver",
+          "commands": ["./dev back"]
+        }
+      ]
+    },
+    {
+      "splitTerminals": [
+        {
+          "name": "frontend",
+          "commands": ["cd rango/frontend"]
+        },
+        {
+          "name": "backend",
+          "commands": ["cd rango/backend"]
+        }
+      ]
+    }
+  ]
+}
