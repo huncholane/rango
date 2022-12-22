@@ -11,6 +11,16 @@ if [ -z "$VIRTUAL_ENV" ]; then
     source venv/Scripts/activate
 fi
 
+# if first arg is var, add a variable to venv/Scripts/activate
+if [ "$1" = "var" ]; then
+    echo "export $2=$3" >> venv/Scripts/activate
+    # if venv is activated, deactivate it
+    if [ ! -z "$VIRTUAL_ENV" ]; then
+        deactivate
+    fi
+    source venv/Scripts/activate
+fi
+
 # if first arg is back, build frontend and run backend
 if [ "$1" = "back" ]; then
     # build the frontend
