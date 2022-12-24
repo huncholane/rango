@@ -14,15 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from backend import views
+from django.urls import include, re_path
+from utils.views import RangoView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.IndexView.as_view(), name='index'),
+    re_path(r'^api/', include('api.urls')),
+    re_path(r'^admin/', admin.site.urls),
+    re_path(r'(?!api?/).*', RangoView.as_view()),
 ]
 
-# include media files
+# include media files in development
 from django.conf import settings
 from django.conf.urls.static import static
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

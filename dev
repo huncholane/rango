@@ -35,9 +35,11 @@ if [ "$1" = "back" ]; then
     # compose up the dev compose file
     docker compose -f dev-compose.yml up -d
 
-    # create secret key
+    # create secret key if .env doesn't exist
     cd rango/backend
-    python manage.py createsecret
+    if [ ! -f ".env" ]; then
+        python manage.py createsecret
+    fi
 
     # migrate database
     python manage.py migrate
