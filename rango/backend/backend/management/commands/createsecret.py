@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 
 class Command(BaseCommand):
-    help = 'Closes the specified poll for voting'
+    help = 'Create a new secret key for the .env file.'
 
     def handle(self, *args, **options):
         # Generate a django secret key
