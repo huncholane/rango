@@ -16,13 +16,13 @@ class Command(BaseCommand):
         # Get the api name from the first argument
         api_name = options['api_name'].lower()
         model_name = api_name.capitalize()
-        api_name += 's'
         # Get the root directory
         root_dir = options['root_dir'].lower()
         # Create context for the templates
         context = {
             'api_name': api_name,
             'root_dir': root_dir,
+            'model_name': model_name,
         }
         # If the api model does not exist raise a CommandError
         try:
@@ -36,6 +36,10 @@ class Command(BaseCommand):
         # Create the api directory
         api_dir = os.path.join(root_dir, api_name)
         os.makedirs(api_dir, exist_ok=True)
+        # Create an __init__.py file
+        init_file = os.path.join(api_dir, '__init__.py')
+        with open(init_file, 'w') as f:
+            f.write('')
         # Load the viewset template and write it to the views file
         views_file = os.path.join(api_dir, 'views.py')
         with open(views_file, 'w') as f:
@@ -44,4 +48,27 @@ class Command(BaseCommand):
         serializers_file = os.path.join(api_dir, 'serializers.py')
         with open(serializers_file, 'w') as f:
             f.write(strip_tags(render_to_string('api/serializers.html', context)))
+        # Load the urls template and write it to the urls file
+        urls_file = os.path.join(api_dir, 'urls.py')
+        with open(urls_file, 'w') as f:
+            f.write(strip_tags(render_to_string('api/urls.html', context)))
+        # Add the urls to the root urls file
+        root_urls_file = os.path.join(root_dir, 'urls.py')
+        with open(root_urls_file, 'r') as f:
+            lines = f.readlines()
+        with open(root_urls_file, 'w') as f:
+            for line in lines:
+                f.write(line)
+                if 'Auto-generated' in line:
+                    f.write(f"\tre_path('', include('{root_dir}.{api_name}.urls')),\n")
+        # Add the url to the api root
+        api_root_file = os.path.join(root_dir, 'views.py')
+        with open(api_root_file, 'r') as f:
+            lines = f.readlines()
+        with open(api_root_file, 'w') as f:
+            for line in lines:
+                f.write(line)
+                if 'Auto-generated' in line:
+                    print('found user-list')
+                    f.write(f"\t\t\t'{api_name}': reverse('{api_name}-list', request=request),\n")
         self.stdout.write(self.style.SUCCESS(f"Successfully created API {api_name}"))

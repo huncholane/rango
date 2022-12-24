@@ -1,9 +1,9 @@
-<pre>
-from rest_framework import serializers
-from {{root_dir}}.models import {{api_name|title}}
+<pre>from rest_framework import serializers
+from {{root_dir}}.models import {{model_name}}
 
 
-class {{api_name|title}}Serializer(serializers.HyperlinkedModelSerializer):
+class {{model_name}}Serializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = {{api_name|title}}
+        model = {{model_name}}
+        fields = '__all__'
 </pre>

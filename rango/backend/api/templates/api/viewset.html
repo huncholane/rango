@@ -1,15 +1,14 @@
-<pre>
-from rest_framework import viewsets
+<pre>from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
-from {{root_dir}}.models import {{api_name|title}}
-from api.{{api_name}}.serializers import {{api_name|title}}Serializer
+from {{root_dir}}.models import {{model_name}}
+from api.{{api_name}}.serializers import {{model_name}}Serializer
 
 
-class {{api_name|title}}(viewsets.ModelViewSet):
+class {{model_name}}ViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows {{api_name}} to be viewed or edited.
+    API endpoint that allows {{model_name}} to be viewed or edited.
     """
-    queryset = {{api_name|title}}.objects.all()
-    serializer_class = UserSerializer
+    queryset = {{model_name}}.objects.all()
+    serializer_class = {{model_name}}Serializer
     permission_classes = [AllowAny]
 </pre>

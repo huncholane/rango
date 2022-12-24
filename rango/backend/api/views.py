@@ -7,5 +7,6 @@ class ApiRoot(APIRootView):
 
     def get(self, request, *args, **kwargs):
         return Response({
-            'users': reverse('user-list', request=request),
+            'user': reverse('user-list', request=request),
+            # Auto-generated: a keyword used by the createapi command to know where to add new urls
         })
