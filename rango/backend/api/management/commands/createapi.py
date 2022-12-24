@@ -26,7 +26,8 @@ class Command(BaseCommand):
         }
         # If the api model does not exist raise a CommandError
         try:
-            __import__(f'{root_dir}.models.{model_name}')
+            # Test if the model exists
+            getattr(__import__(root_dir).models, model_name)
         except:
             raise CommandError(f"Model {model_name} does not exist")
         # If the root directory does not exist raise a CommandError
