@@ -37,6 +37,10 @@ ALLOWED_HOSTS = [f'.{os.environ.get("DOMAIN")}', f'.{os.environ.get("NGINX_HOST"
 CSRF_TRUSTED_ORIGINS = []
 for host in ALLOWED_HOSTS:
     CSRF_TRUSTED_ORIGINS += [f'https://*{host}', f'http://*{host}']
+# Allow all hosts for development
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
+    CSRF_TRUSTED_ORIGINS = ['http://*', 'https://*']
 
 
 # Application definition

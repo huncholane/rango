@@ -1,0 +1,174 @@
+openapi: 3.0.2
+info:
+  title: ''
+  version: ''
+paths:
+  /api/user/:
+    get:
+      operationId: listUsers
+      description: API endpoint that allows users to be viewed or edited.
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/user'
+          description: ''
+      tags:
+      - User
+    post:
+      operationId: createUser
+      description: API endpoint that allows users to be viewed or edited.
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/user'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/user'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+          description: ''
+      tags:
+      - User
+  /api/user/{id}/:
+    get:
+      operationId: retrieveUser
+      description: API endpoint that allows users to be viewed or edited.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+          description: ''
+      tags:
+      - User
+    put:
+      operationId: updateUser
+      description: API endpoint that allows users to be viewed or edited.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/user'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/user'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+          description: ''
+      tags:
+      - User
+    patch:
+      operationId: partialUpdateUser
+      description: API endpoint that allows users to be viewed or edited.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/user'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/user'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+          description: ''
+      tags:
+      - User
+    delete:
+      operationId: destroyUser
+      description: API endpoint that allows users to be viewed or edited.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - User
+components:
+  schemas:
+    user:
+      type: object
+      properties:
+        url:
+          type: string
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+\z
+          maxLength: 150
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        password:
+          type: string
+          writeOnly: true
+          maxLength: 128
+      required:
+      - username
+      - password
