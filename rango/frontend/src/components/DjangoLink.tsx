@@ -8,7 +8,7 @@ type Props = {
 
 const DjangoLink = ({ to: target, children, className }: Props) => {
   return (
-    <a href={`http://localhost:8000/${target}/`} className={className}>
+    <a href={`/${target}/`} className={className}>
       {children}
     </a>
   );
