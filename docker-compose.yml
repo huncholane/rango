@@ -6,7 +6,7 @@ services:
       - assets:/rango/assets
       - media:/rango/media
     depends_on:
-      - db
+      - postgres
 
   nginx:
     image: nginx:1.23.3-alpine

@@ -13,7 +13,6 @@ const Users = () => {
 
   const loadUsers = () => {
     UserService.listUsers().then((users) => {
-      console.log(users);
       setUsers(users);
     });
   };
@@ -26,9 +25,13 @@ const Users = () => {
       last_name: last_name.current?.value,
       email: email.current?.value,
       password: password.current?.value || "",
-    }).then((user) => {
-      loadUsers();
-    });
+    })
+      .then(() => {
+        loadUsers();
+      })
+      .catch((reason) => {
+        console.log("you cant do that");
+      });
   };
 
   useEffect(loadUsers, []);
@@ -40,6 +43,7 @@ const Users = () => {
           type="text"
           ref={username}
           placeholder="Username"
+          required
         />
         <input
           className="border-2"
@@ -81,8 +85,8 @@ const Users = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
-            <User user={user} />
+          {users.map((user, i) => (
+            <User key={i} user={user} />
           ))}
         </tbody>
       </table>

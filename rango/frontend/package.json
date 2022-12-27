@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && cp -r dist/assets/* ../backend/backend/static && cp dist/index.html ../backend/backend/templates/index.html",
+    "build": "tsc && vite build && rm -r ../backend/backend/static/* && cp -r dist/assets/* ../backend/backend/static && cp dist/index.html ../backend/backend/templates/index.html",
     "preview": "vite preview",
-    "syncapi": "cd ../backend && python manage.py generateschema --file ../frontend/src/django/schema.yml && cd ../frontend && npx openapi-typescript-codegen --input src/django/schema.yml --output src/api --indent 2"
+    "syncapi": "cd ../backend && python manage.py generateschema --file ../frontend/src/api/schema.yml && cd ../frontend && npx openapi-typescript-codegen --input src/api/schema.yml --output src/api --indent 2"
   },
   "dependencies": {
     "openapi-typescript": "^6.1.0",

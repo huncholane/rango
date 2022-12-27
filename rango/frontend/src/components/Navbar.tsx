@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import DjangoLink from "../django/components/DjangoLink";
+import DjangoLink from "./DjangoLink";
 import rango from "../assets/rango.png";
 
 const activeLinkStyle = "m-auto bg-blue-400 px-5 py-2 rounded-full";
@@ -26,14 +26,6 @@ const Navbar = () => {
         Home
       </NavLink>
       <NavLink
-        to="/about"
-        className={({ isActive }) =>
-          isActive ? activeLinkStyle : inactiveLinkStyle
-        }
-      >
-        About
-      </NavLink>
-      <NavLink
         to="/users"
         className={({ isActive }) =>
           isActive ? activeLinkStyle : inactiveLinkStyle
@@ -49,10 +41,10 @@ const Navbar = () => {
       >
         404
       </NavLink>
-      <DjangoLink target="api" className={inactiveLinkStyle}>
+      <DjangoLink to="api" className={inactiveLinkStyle}>
         API
       </DjangoLink>
-      <DjangoLink target="admin" className={inactiveLinkStyle}>
+      <DjangoLink to="admin" className={inactiveLinkStyle}>
         Admin
       </DjangoLink>
     </div>

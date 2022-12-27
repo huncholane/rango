@@ -6,8 +6,11 @@ django-filter==22.1
 djangorestframework==3.14.0
 h11==0.14.0
 Markdown==3.4.1
+psycopg2==2.9.5
 python-dotenv==0.21.0
 pytz==2022.7
+PyYAML==6.0
 sqlparse==0.4.3
 tzdata==2022.7
+uritemplate==4.1.1
 uvicorn==0.20.0
