@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # start the development docker container
+docker compose down
 docker compose -f dev-compose.yml up -d --remove-orphans
 
 cd rango/backend
@@ -13,8 +14,8 @@ fi
 
 # if no argument, run the backend
 if [ -z "$1" ]; then
-    python manage.py runserver 0.0.0.0:8000 & cd ../..
+    python manage.py runserver 0.0.0.0:8000 
 else
     # run the arguments as python manage.py
-    python manage.py $1 ${@:2} && cd ../..
+    python manage.py $1 ${@:2}
 fi

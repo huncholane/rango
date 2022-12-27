@@ -5,7 +5,7 @@ cd rango/frontend
 # if there is no argument, run the npm dev server
 # else npm run the command
 if [ -z "$1" ]; then
-    npm run dev & cd ../..
+    npm run dev
 else
-    npm run $1 && cd ../..
+    npm run $1
 fi

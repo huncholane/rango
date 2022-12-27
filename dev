@@ -12,6 +12,6 @@ fi
 if [ -n "$1" ]; then
     bash devscripts/$1 ${@:2}
 else
-    echo "Running the docker compose"
+    docker compose down
     docker compose up --build --remove-orphans
 fi
