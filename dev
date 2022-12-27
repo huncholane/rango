@@ -1,55 +1,17 @@
 #!/bin/bash
 # For development only
 
-# if venv doesn't exist, create it
+# if venv doesn't exist initialize it
 if [ ! -d "venv" ]; then
-    python -m venv venv
-    # add NGINX_HOST and DOMAIN to venv/Scripts/activate
-    echo "export NGINX_HOST=localhost" >> venv/Scripts/activate   
-    echo "export DOMAIN=localhost" >> venv/Scripts/activate
-    echo "export POSTGRES_USER=postgres" >> venv/Scripts/activate
-    echo "export POSTGRES_PASSWORD=postgres" >> venv/Scripts/activate
-    echo "export POSTGRES_DB=postgres" >> venv/Scripts/activate
-    echo "export POSTGRES_HOST=postgres" >> venv/Scripts/activate
-    echo "export POSTGRES_PORT=5821" >> venv/Scripts/activate
+    bash init
+else 
+    source venv/**/activate
 fi
 
-# if first arg is var, add a variable to venv/Scripts/activate
-if [ "$1" = "var" ]; then
-    echo "export $2=$3" >> venv/Scripts/activate
-fi
-
-# if venv is activated, deactivate it
-if [ ! -z "$VIRTUAL_ENV" ]; then
-    deactivate
-fi
-source venv/Scripts/activate
-
-# if first arg is back, build frontend and run backend
-if [ "$1" = "back" ]; then
-    # build the frontend
-    cd rango/frontend
-    npm run build
-    cd ../..
-
-    # compose up the dev compose file
-    docker compose -f dev-compose.yml up -d
-
-    # create secret key if .env doesn't exist
-    cd rango/backend
-    if [ ! -f ".env" ]; then
-        python manage.py createsecret
-    fi
-
-    # migrate database
-    python manage.py migrate
-
-    # run backend development server
-    python manage.py runserver & cd ../..
-fi
-
-# if first arg is front, run frontend development server
-if [ "$1" = "front" ]; then
-    cd rango/frontend
-    npm run dev & cd ../..
+# run devscript for args 1+ if they exist
+if [ -n "$1" ]; then
+    bash devscripts/$1 ${@:2}
+else
+    echo "Running the docker compose"
+    docker compose up --build --remove-orphans
 fi

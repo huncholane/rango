@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# if the arg is store, store the variable into venv script
+echo "export $2=$3" >> venv/**/activate
+

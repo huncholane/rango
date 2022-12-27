@@ -1,0 +1,18 @@
+#!/bin/bash
+
+python -m venv venv
+
+echo "export NGINX_HOST=localhost" >> venv/**/activate
+echo "export DOMAIN=localhost" >> venv/**/activate
+echo "export POSTGRES_USER=postgres" >> venv/**/activate
+echo "export POSTGRES_PASSWORD=postgres" >> venv/**/activate
+echo "export POSTGRES_DB=postgres" >> venv/**/activate
+echo "export POSTGRES_HOST=postgres" >> venv/**/activate
+echo "export POSTGRES_PORT=5821" >> venv/**/activate
+
+source venv/**/activate
+python -m pip install --upgrade pip
+cd rango/backend
+python -m pip install -r requirements.txt 
+cd ../frontend
+npm install
