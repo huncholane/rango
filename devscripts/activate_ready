@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# keep checking for activate file to exist
+while [ ! -f venv/**/activate ]; do
+    echo "Waiting for venv to be created..."
+    sleep 1
+done

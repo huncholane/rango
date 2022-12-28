@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cd rango/frontend
+npm install
 
 # if there is no argument, run the npm dev server
 # else npm run the command

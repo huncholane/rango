@@ -4,7 +4,9 @@
 docker compose down
 docker compose -f dev-compose.yml up -d --remove-orphans
 
+python -m pip install --upgrade pip
 cd rango/backend
+python -m pip install -r requirements.txt 
 
 # if no .env with ls -a in backend, create one
 if [ ! -f .env ]; then
@@ -14,6 +16,7 @@ fi
 
 # if no argument, run the backend
 if [ -z "$1" ]; then
+    python manage.py migrate
     python manage.py runserver 0.0.0.0:8000 
 else
     # run the arguments as python manage.py

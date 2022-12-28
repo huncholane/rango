@@ -3,10 +3,10 @@
 
 # if venv doesn't exist initialize it
 if [ ! -d "venv" ]; then
-    bash init
-else 
-    source venv/**/activate
+    bash devscripts/init
 fi
+bash devscripts/activate_ready
+source venv/**/activate
 
 # run devscript for args 1+ if they exist
 if [ -n "$1" ]; then

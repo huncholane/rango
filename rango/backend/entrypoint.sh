@@ -2,9 +2,9 @@
 # For production only
 
 # create secret key if .env doesn't exist
-#if [ ! -f "backend/.env" ]; then
-    #python manage.py createsecret
-#fi
+if [ ! -f ".env" ]; then
+    python manage.py createsecret
+fi
 
 # collect staticfiles
 python manage.py collectstatic --noinput
