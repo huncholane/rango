@@ -13,6 +13,9 @@ class ApiRoot(APIRootView):
 
     def get(self, request, *args, **kwargs):
         return Response({
-            'user': reverse('user-list', request=request),
             # Auto-generated: a keyword used by the createapi command to know where to add new urls
+            'user': reverse('user-list', request=request),
+            'openapi': reverse('openapi-schema', request=request),
+            'swagger-ui': reverse('swagger-ui', request=request),
+            'auth': reverse('api-auth-root', request=request),
         })

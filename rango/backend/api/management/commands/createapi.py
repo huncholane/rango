@@ -9,13 +9,13 @@ class Command(BaseCommand):
     help = "Creates a new API. Usage: python manage.py createapi api_name [root_dir]"
 
     def add_arguments(self, parser: CommandParser) -> None:
-        parser.add_argument('api_name', type=str, help='The name of the API model')
+        parser.add_argument('model_name', type=str, help='The name of the API model')
         parser.add_argument('root_dir', type=str, nargs='?', default='api', help='The root directory for the API model. Defaults to "api"')
 
     def handle(self, *args, **options):
         # Get the api name from the first argument
-        api_name = options['api_name'].lower()
-        model_name = api_name.capitalize()
+        model_name = options['model_name']
+        api_name = model_name.lower()
         # Get the root directory
         root_dir = options['root_dir'].lower()
         # Create context for the templates
