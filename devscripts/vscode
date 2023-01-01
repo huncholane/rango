@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# if disable move .vscode to .vscode.template
+if [ "$1" = "disable" ]; then
+    mv .vscode .vscode.template
+    exit 0
+fi
+
+# if enable move .vscode.template to .vscode
+if [ "$1" = "enable" ]; then
+    mv .vscode.template .vscode
+    exit 0
+fi

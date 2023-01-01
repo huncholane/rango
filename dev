@@ -1,17 +1,22 @@
 #!/bin/bash
 # For development only
 
-# if venv doesn't exist initialize it
+# if no venv
 if [ ! -d "venv" ]; then
-    bash devscripts/init
+    # if no args or init, run init
+    if [ -z "$1" ] || [ "$1" = "init" ]; then
+        bash devscripts/init
+        exit 0
+    else
+        echo "No venv found, run init first"
+        exit 1
+    fi
 fi
-bash devscripts/activate_ready
-source venv/**/activate
 
 # run devscript for args 1+ if they exist
 if [ -n "$1" ]; then
+    source venv/**/activate
     bash devscripts/$1 ${@:2}
 else
-    docker compose down
-    docker compose up --build --remove-orphans
+    echo "No arguments provided"
 fi

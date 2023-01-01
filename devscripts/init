@@ -9,3 +9,33 @@ echo "export POSTGRES_PASSWORD=postgres" >> venv/**/activate
 echo "export POSTGRES_DB=postgres" >> venv/**/activate
 echo "export POSTGRES_HOST=localhost" >> venv/**/activate
 echo "export POSTGRES_PORT=5821" >> venv/**/activate
+
+# Activate the virtual environment until successful and sleep in between tries
+echo "Activating virtual environment"
+source venv/**/activate
+while [ $? -ne 0 ]; do
+    echo "Failed to activate virtual environment, trying again in 1 second"
+    source venv/**/activate
+    sleep 1
+done
+
+# Install the requirements until successful and sleep in between tries
+cd rango/backend
+echo "Installing requirements"
+pip install -r requirements.txt
+while [ $? -ne 0 ]; do
+    echo "Failed to install requirements, trying again in 1 second"
+    pip install -r requirements.txt
+    sleep 1
+done
+
+# Install the frontend requirements until successful and sleep in between tries
+cd ../frontend
+echo "Installing frontend requirements"
+npm install
+while [ $? -ne 0 ]; do
+    echo "Failed to install frontend requirements, trying again in 1 second"
+    npm install
+    sleep 1
+done
+

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# start the development docker container
+if [ -z "$1" ]; then
+    docker-compose -f dev-compose.yml up -d --remove-orphans
+    # while docker compose logs not have "database system is ready to accept connections" sleep 1
+    while ! docker-compose -f dev-compose.yml logs | grep "database system is ready to accept connections"; 
+        do sleep 1
+        echo "Waiting for database to be ready"
+    done
+else
+    docker-compose -f dev-compose.yml $1 ${@:2}
+fi
