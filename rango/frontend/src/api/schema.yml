@@ -138,6 +138,59 @@ paths:
           description: ''
       tags:
       - User
+  /api/auth/logout:
+    get:
+      operationId: retrieveLogout
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/logout'
+          description: ''
+      tags:
+      - Auth
+  /api/auth/logged-in:
+    get:
+      operationId: retrieveLoggedIn
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/logged-in'
+          description: ''
+      tags:
+      - Auth
+  /api/auth/login:
+    post:
+      operationId: createLogin
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/login'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/login'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/login'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/login'
+          description: ''
+      tags:
+      - Auth
 components:
   schemas:
     user:
@@ -171,4 +224,31 @@ components:
           maxLength: 128
       required:
       - username
+      - password
+    logout:
+      type: object
+      properties:
+        detail:
+          type: string
+          readOnly: true
+          default: Success
+    logged-in:
+      type: object
+      properties:
+        detail:
+          type: boolean
+          readOnly: true
+          default: false
+    login:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          writeOnly: true
+      required:
       - password
